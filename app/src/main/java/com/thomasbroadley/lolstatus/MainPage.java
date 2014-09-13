@@ -52,7 +52,7 @@ public class MainPage extends ActionBarActivity {
 
         ObjectInputStream ois;
 
-        if (getFileStreamPath(filename).exists()) {
+        if (getFileStreamPath(filename).exists() && getFileStreamPath(filename).length() != 0) {
             ois = new ObjectInputStream(openFileInput(filename));
             useServer = (ArrayList<Boolean>) ois.readObject();
         } else {
