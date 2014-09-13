@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import org.json.JSONObject;
 
@@ -36,11 +35,6 @@ public class MainPage extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
-
-        if (getIntent().getBooleanExtra("settingsSaved", false)) {
-            Toast toast = Toast.makeText(this, "Settings saved", Toast.LENGTH_SHORT);
-            toast.show();
-        }
 
         try {
             readStatus();
