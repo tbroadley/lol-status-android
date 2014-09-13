@@ -143,7 +143,7 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
                 message.setPadding(sidePaddingInPX, topPaddingInPX, sidePaddingInPX, 0);
 
                 TextView time = new TextView(context);
-                time.setText("Updated " + DateUtils.getRelativeDateTimeString(context, thisUpdate.getUpdated().getTime(), 0, DateUtils.WEEK_IN_MILLIS, 0));
+                time.setText("Posted " + DateUtils.getRelativeDateTimeString(context, thisUpdate.getUpdated().getTime(), 0, DateUtils.WEEK_IN_MILLIS, 0));
                 time.setTextSize(12);
                 time.setPadding(sidePaddingInPX, 0, sidePaddingInPX, 0);
 
