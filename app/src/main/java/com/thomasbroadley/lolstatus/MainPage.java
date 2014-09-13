@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 
@@ -118,6 +120,13 @@ public class MainPage extends ActionBarActivity {
             JSONReader json = new JSONReader();
             JSONObject jsonobj = json.read(url);
             server.add(new ServerStatus(jsonobj));
+        }
+
+        TextView empty = (TextView)findViewById(R.id.empty);
+        if (server.isEmpty()) {
+            empty.setVisibility(View.VISIBLE);
+        } else {
+            empty.setVisibility(View.INVISIBLE);
         }
     }
 

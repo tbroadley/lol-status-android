@@ -7,5 +7,6 @@
     <string name="title_activity_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="settings_header">Displayed servers:</string>
+    <string name="no_servers_selected">No servers selected.</string>
 
 </resources>
