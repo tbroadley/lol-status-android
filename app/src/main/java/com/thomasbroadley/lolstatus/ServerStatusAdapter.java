@@ -139,12 +139,12 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
 
                 TextView message = new TextView(context);
                 message.setText(thisUpdate.getMessage());
-                message.setTextSize(15);
+                message.setTextSize(17);
                 message.setPadding(sidePaddingInPX, topPaddingInPX, sidePaddingInPX, 0);
 
                 TextView time = new TextView(context);
                 time.setText("Updated " + DateUtils.getRelativeDateTimeString(context, thisUpdate.getUpdated().getTime(), 0, DateUtils.WEEK_IN_MILLIS, 0));
-                time.setTextSize(10);
+                time.setTextSize(12);
                 time.setPadding(sidePaddingInPX, 0, sidePaddingInPX, 0);
 
                 updates.addView(message);
@@ -155,9 +155,11 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
         }
 
         TextView name = (TextView)view.findViewById(R.id.service_name);
-        name.setText(service.getName() + ":");
+        name.setTextSize(22);
+        name.setText(service.getName());
 
         TextView status = (TextView)view.findViewById(R.id.service_status);
+        status.setTextSize(22);
         String statusString = service.getStatus();
 
         if (statusString.equals("online")) {

@@ -28,8 +28,8 @@
             android:id="@+id/server_icon"
             android:scaleType="fitEnd"
             android:layout_gravity="center_vertical"
-            android:paddingEnd="22dp"
-            android:paddingRight="22dp"
+            android:paddingEnd="27dp"
+            android:paddingRight="27dp"
             android:paddingTop="5dp" />
     </TableRow>
 </TableLayout>
