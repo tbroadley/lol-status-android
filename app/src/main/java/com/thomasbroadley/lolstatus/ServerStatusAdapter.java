@@ -123,12 +123,12 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
 
         ArrayList<Incident> incidentsArrayList = service.getIncidents();
 
-        for (int j = 0; j < incidentsArrayList.size(); j++) {
+        for (int j = incidentsArrayList.size() - 1; j >= 0; j--) {
             LinearLayout updates = new TableLayout(context);
 
             ArrayList<Update> updatesArrayList = incidentsArrayList.get(j).getUpdates();
 
-            for (int k = 0; k < updatesArrayList.size(); k++) {
+            for (int k = updatesArrayList.size() - 1; k >= 0; k--) {
                 Update thisUpdate = updatesArrayList.get(k);
 
                 Resources res = context.getResources();
