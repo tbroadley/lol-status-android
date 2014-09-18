@@ -188,6 +188,19 @@ public class MainPageFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (id == R.id.action_disclaimer) {
+            updateExpanded();
+
+            DisclaimerFragment disclaimer = new DisclaimerFragment();
+
+            Bundle b = new Bundle();
+            b.putStringArrayList("serverName", serverName);
+            disclaimer.setArguments(b);
+
+            FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, disclaimer);
+            transaction.addToBackStack(null);
+            transaction.commit();
         }
         return super.onOptionsItemSelected(item);
     }

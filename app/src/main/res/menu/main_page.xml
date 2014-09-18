@@ -10,4 +10,8 @@
         android:title="@string/action_settings"
         android:icon="@drawable/ic_action_settings"
         app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_disclaimer"
+        android:title="@string/disclaimer_title"
+        android:icon="@drawable/ic_action_about"
+        app:showAsAction="ifRoom" />
 </menu>
