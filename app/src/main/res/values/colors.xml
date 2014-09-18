@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="divider_color">#8F8F8F</color>
-    <color name="child_divider_color">#CCCCCC</color>
+    <color name="divider_color">#666666</color>
+    <color name="child_divider_color">#999999</color>
+    <color name="child_child_divider_color">#CCCCCC</color>
     <color name="online_color">#00C233</color>
     <color name="offline_color">#FF0000</color>
     <color name="server_bg_online_color">#2000C233</color>
     <color name="server_bg_offline_color">#20FF0000</color>
+    <color name="time_color">#888888</color>
 </resources>

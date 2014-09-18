@@ -8,5 +8,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="settings_header">Displayed servers:</string>
     <string name="no_servers_selected">No servers selected.</string>
+    <string name="select_all">Select all</string>
+    <string name="clear_all">Clear all</string>
 
 </resources>

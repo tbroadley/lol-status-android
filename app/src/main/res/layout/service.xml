@@ -7,7 +7,7 @@
 
     <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:stretchColumns="0,1"
         android:paddingLeft="5dp"
         android:paddingRight="5dp">
@@ -36,7 +36,9 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/incidents"></LinearLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/incidents"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"></LinearLayout>
 
 </LinearLayout>

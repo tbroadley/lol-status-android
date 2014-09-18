@@ -115,6 +115,7 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int i, int i2, boolean b, View view, ViewGroup viewGroup) {
         Service service = (Service)getChild(i, i2);
+        Resources res = context.getResources();
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.service, null);
@@ -125,30 +126,26 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
 
         for (int j = incidentsArrayList.size() - 1; j >= 0; j--) {
             LinearLayout updates = new TableLayout(context);
+            updates.setBackground(context.getResources().getDrawable(R.drawable.linear_layout_background));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            int topMarginInDP = 5;
+            int topMarginInPX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, topMarginInDP, res.getDisplayMetrics());
+
+            if (j == 0) {
+                params.setMargins(0, topMarginInPX, 0, topMarginInPX);
+            } else {
+                params.setMargins(0, topMarginInPX, 0, 0);
+            }
+
+            updates.setLayoutParams(params);
 
             ArrayList<Update> updatesArrayList = incidentsArrayList.get(j).getUpdates();
 
-            for (int k = updatesArrayList.size() - 1; k >= 0; k--) {
-                Update thisUpdate = updatesArrayList.get(k);
+            updates.addView(createUpdate(updatesArrayList.get(0), true));
 
-                Resources res = context.getResources();
-                int sidePaddingInDP = 15;
-                int sidePaddingInPX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, sidePaddingInDP, res.getDisplayMetrics());
-                int topPaddingInDP = 2;
-                int topPaddingInPX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, topPaddingInDP, res.getDisplayMetrics());
-
-                TextView message = new TextView(context);
-                message.setText(thisUpdate.getMessage());
-                message.setTextSize(17);
-                message.setPadding(sidePaddingInPX, topPaddingInPX, sidePaddingInPX, 0);
-
-                TextView time = new TextView(context);
-                time.setText("Posted " + DateUtils.getRelativeDateTimeString(context, thisUpdate.getUpdated().getTime(), 0, DateUtils.WEEK_IN_MILLIS, 0));
-                time.setTextSize(12);
-                time.setPadding(sidePaddingInPX, 0, sidePaddingInPX, 0);
-
-                updates.addView(message);
-                updates.addView(time);
+            for (int k = 1; k < updatesArrayList.size(); k++) {
+                updates.addView(createUpdate(updatesArrayList.get(k), false));
             }
 
             incidents.addView(updates);
@@ -171,7 +168,6 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
         String output = statusString.substring(0, 1).toUpperCase() + statusString.substring(1);
         status.setText(output);
 
-        Resources res = context.getResources();
         int topPaddingInDP = 3;
         int topPaddingInPX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, topPaddingInDP, res.getDisplayMetrics());
 
@@ -181,6 +177,44 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
         view.setPadding(0, topPaddingInPX, 0, bottomPaddingInPX);
 
         return view;
+    }
+
+    private LinearLayout createUpdate(Update thisUpdate, boolean current) {
+        LinearLayout update = new LinearLayout(context);
+        update.setOrientation(LinearLayout.VERTICAL);
+
+        Resources res = context.getResources();
+
+        int sidePaddingInDP = 15;
+        int sidePaddingInPX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, sidePaddingInDP, res.getDisplayMetrics());
+        int topPaddingInDP = 2;
+        int topPaddingInPX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, topPaddingInDP, res.getDisplayMetrics());
+
+        TextView message = new TextView(context);
+        message.setText(thisUpdate.getMessage());
+        if (current) {
+            message.setTextSize(17);
+            message.setPadding(sidePaddingInPX, topPaddingInPX, sidePaddingInPX, 0);
+        } else {
+            message.setTextSize(14);
+            message.setPadding(sidePaddingInPX * 2, topPaddingInPX, sidePaddingInPX, 0);
+        }
+
+        TextView time = new TextView(context);
+        time.setText("Posted " + DateUtils.getRelativeDateTimeString(context, thisUpdate.getUpdated().getTime(), 0, DateUtils.WEEK_IN_MILLIS, 0));
+        if (current) {
+            time.setTextSize(14);
+            time.setPadding(sidePaddingInPX, 0, sidePaddingInPX, 0);
+        } else {
+            time.setTextSize(11);
+            time.setPadding(sidePaddingInPX * 2, topPaddingInPX, sidePaddingInPX, 0);
+        }
+        time.setTextColor(context.getResources().getColor(R.color.time_color));
+
+        update.addView(message);
+        update.addView(time);
+
+        return update;
     }
 
     @Override
