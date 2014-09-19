@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class MainPage extends ActionBarActivity {
 
-    final String APIKEY = new APIKey().getKey();
     final String URL = "http://status.leagueoflegends.com/shards/";
 
     final String[] SERVER = new String[] {"br", "eune", "euw", "lan", "las", "na", "oce", "ru", "tr"};
