@@ -15,6 +15,10 @@ public class ServerStatus {
 
     public ServerStatus() {}
 
+    public ServerStatus(String name) throws Exception {
+        this.name = name;
+    }
+
     public ServerStatus(JSONObject json) throws Exception {
         name = json.getString("name");
         shortname = json.getString("slug");

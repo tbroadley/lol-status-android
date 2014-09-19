@@ -2,11 +2,11 @@ package com.thomasbroadley.lolstatus;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,8 +33,6 @@ public class MainPageFragment extends Fragment {
 
     ArrayList<ServerStatus> server;
     ArrayList<Boolean> useServer;
-
-    ArrayList<String> serverName;
     ArrayList<String> displayedServer;
 
     ExpandableListView elv;
@@ -44,8 +42,6 @@ public class MainPageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        serverName = getArguments().getStringArrayList("serverName");
 
         setHasOptionsMenu(true);
     }
@@ -137,24 +133,39 @@ public class MainPageFragment extends Fragment {
     public void updateServerStatus() throws Exception {
         server = new ArrayList<ServerStatus>();
 
-        for (int i = 0; i < displayedServer.size(); i++) {
-            String url = URL + displayedServer.get(i) + APIKEY;
+        String filename = "status_file";
 
-            JSONReader json = new JSONReader();
-            JSONObject jsonobj = json.read(url);
-            server.add(new ServerStatus(jsonobj));
+        ConnectivityManager manager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
 
-        }
+        if (info != null && info.isConnected()) {
+            for (int i = 0; i < displayedServer.size(); i++) {
+                String url = URL + displayedServer.get(i) + APIKEY;
 
-        TextView empty = (TextView)getView().findViewById(R.id.empty);
-        if (server.isEmpty()) {
-            empty.setVisibility(View.VISIBLE);
+                JSONReader json = new JSONReader();
+                JSONObject jsonobj = json.read(url);
+                server.add(new ServerStatus(jsonobj));
+
+            }
+
+            TextView empty = (TextView) getView().findViewById(R.id.empty);
+            if (server.isEmpty()) {
+                empty.setVisibility(View.VISIBLE);
+                empty.setText(R.string.no_servers_selected);
+            } else {
+                empty.setVisibility(View.INVISIBLE);
+            }
+
+            Toast t = Toast.makeText(getActivity(), "Server status updated", Toast.LENGTH_SHORT);
+            t.show();
         } else {
-            empty.setVisibility(View.INVISIBLE);
-        }
+            TextView empty = (TextView) getView().findViewById(R.id.empty);
+            empty.setVisibility(View.VISIBLE);
+            empty.setText(R.string.connected_query);
 
-        Toast t =  Toast.makeText(getActivity(), "Server status updated", Toast.LENGTH_SHORT);
-        t.show();
+            Toast t = Toast.makeText(getActivity(), "Could not update server status", Toast.LENGTH_SHORT);
+            t.show();
+        }
     }
 
     @Override
@@ -173,10 +184,6 @@ public class MainPageFragment extends Fragment {
 
             SettingsFragment settings = new SettingsFragment();
 
-            Bundle b = new Bundle();
-            b.putStringArrayList("serverName", serverName);
-            settings.setArguments(b);
-
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, settings);
             transaction.addToBackStack(null);
@@ -192,10 +199,6 @@ public class MainPageFragment extends Fragment {
             updateExpanded();
 
             DisclaimerFragment disclaimer = new DisclaimerFragment();
-
-            Bundle b = new Bundle();
-            b.putStringArrayList("serverName", serverName);
-            disclaimer.setArguments(b);
 
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, disclaimer);

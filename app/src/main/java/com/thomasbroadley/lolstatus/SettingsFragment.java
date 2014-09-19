@@ -16,18 +16,16 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
-import org.json.JSONObject;
-
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class SettingsFragment extends Fragment {
     final String[] SERVER = new String[] {"br", "eune", "euw", "lan", "las", "na", "oce", "ru", "tr"};
+    final String[] serverName = new String[] {"Brazil", "EU Nordic and East", "EU West", "Latin America North", "Latin America South", "North America", "Oceania", "Russia", "Turkey"};
 
     ArrayList<CheckBox> box;
 
-    ArrayList<String> serverName;
     ArrayList<Boolean> useServer;
     ArrayList<Boolean> oldUseServer;
     String filename = "servers_to_display";
@@ -37,8 +35,6 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        serverName = getArguments().getStringArrayList("serverName");
 
         ((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -107,7 +103,7 @@ public class SettingsFragment extends Fragment {
             CheckBox cb = new CheckBox(getActivity());
             cb.setChecked(useServer.get(i));
             cb.setTag(i);
-            cb.setText(serverName.get(i));
+            cb.setText(serverName[i]);
             cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -139,10 +135,6 @@ public class SettingsFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             MainPageFragment mainPage = new MainPageFragment();
-
-            Bundle b = new Bundle();
-            b.putStringArrayList("serverName", serverName);
-            mainPage.setArguments(b);
 
             FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, mainPage);

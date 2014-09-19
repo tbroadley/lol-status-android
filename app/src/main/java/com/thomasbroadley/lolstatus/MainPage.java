@@ -1,18 +1,11 @@
 package com.thomasbroadley.lolstatus;
 
-import android.content.SharedPreferences;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ExpandableListView;
-import android.widget.TextView;
 
-import org.json.JSONObject;
-
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 
@@ -31,23 +24,10 @@ public class MainPage extends ActionBarActivity {
 
         serverName = new ArrayList<String>();
 
-        try {
-            for (int i = 0; i < SERVER.length; i++) {
-                String url = URL + SERVER[i] + APIKEY;
-                JSONReader json = new JSONReader();
-                JSONObject jsonobj = json.read(url);
-
-                serverName.add(jsonobj.getString("name"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ConnectivityManager manager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
 
         MainPageFragment mainPage = new MainPageFragment();
-
-        Bundle b = new Bundle();
-        b.putStringArrayList("serverName", serverName);
-        mainPage.setArguments(b);
 
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainPage).commit();
     }

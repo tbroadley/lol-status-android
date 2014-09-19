@@ -15,6 +15,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ServerStatusAdapter extends BaseExpandableListAdapter {
     private Context context;
@@ -207,7 +208,14 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
         }
 
         TextView time = new TextView(context);
-        time.setText("Posted " + DateUtils.getRelativeDateTimeString(context, thisUpdate.getUpdated().getTime(), 0, DateUtils.WEEK_IN_MILLIS, 0));
+
+        long updateTime = thisUpdate.getUpdated().getTime();
+        long now = new Date().getTime();
+        if (updateTime - now > 0) {
+            updateTime = now;
+        }
+
+        time.setText("Posted " + DateUtils.getRelativeDateTimeString(context, updateTime, 0, DateUtils.WEEK_IN_MILLIS, 0));
         if (current) {
             time.setTextSize(14);
             time.setPadding(sidePaddingInPX, 0, sidePaddingInPX, 0);
