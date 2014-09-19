@@ -25,6 +25,9 @@ proguard/
 # Android Studio
 .idea
 
+# Keeping my API key a secret
+APIKey.java
+
 # =========================
 # Operating System Files
 # =========================
