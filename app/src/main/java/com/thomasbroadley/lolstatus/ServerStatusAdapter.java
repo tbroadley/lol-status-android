@@ -126,7 +126,13 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
 
         for (int j = incidentsArrayList.size() - 1; j >= 0; j--) {
             LinearLayout updates = new TableLayout(context);
-            updates.setBackground(context.getResources().getDrawable(R.drawable.linear_layout_background));
+
+            if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                updates.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.linear_layout_background));
+            } else {
+                updates.setBackground(context.getResources().getDrawable(R.drawable.linear_layout_background));
+            }
+
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
             int topMarginInDP = 5;
