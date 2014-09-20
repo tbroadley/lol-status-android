@@ -156,12 +156,20 @@ public class MainPageFragment extends Fragment {
                 empty.setVisibility(View.INVISIBLE);
             }
 
+            ObjectOutputStream oos = new ObjectOutputStream(getActivity().openFileOutput(filename, Context.MODE_PRIVATE));
+            oos.writeObject(serverStatuses);
+
             Toast t = Toast.makeText(getActivity(), "Server status updated", Toast.LENGTH_SHORT);
             t.show();
         } else {
-            TextView empty = (TextView) getView().findViewById(R.id.empty);
-            empty.setVisibility(View.VISIBLE);
-            empty.setText(R.string.connected_query);
+            if (getActivity().getFileStreamPath(filename).exists() && getActivity().getFileStreamPath(filename).length() > 0) {
+                ObjectInputStream ois = new ObjectInputStream(getActivity().openFileInput(filename));
+                serverStatuses = (ArrayList<ServerStatus>)ois.readObject();
+            } else {
+                TextView empty = (TextView) getView().findViewById(R.id.empty);
+                empty.setVisibility(View.VISIBLE);
+                empty.setText(R.string.connected_query);
+            }
 
             Toast t = Toast.makeText(getActivity(), "Could not update server status", Toast.LENGTH_SHORT);
             t.show();

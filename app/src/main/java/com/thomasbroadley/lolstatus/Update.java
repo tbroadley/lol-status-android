@@ -2,14 +2,12 @@ package com.thomasbroadley.lolstatus;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
-* Created by Thomas on 2014-09-13.
-*/
-public class Update {
+public class Update implements Serializable {
     private String message;
     private Date updated;
 

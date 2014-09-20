@@ -3,21 +3,15 @@ package com.thomasbroadley.lolstatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
-* Created by Thomas on 2014-09-13.
-*/
-public class ServerStatus {
+public class ServerStatus implements Serializable {
     private String name;
     private String shortname;
     private ArrayList<Service> service;
 
     public ServerStatus() {}
-
-    public ServerStatus(String name) throws Exception {
-        this.name = name;
-    }
 
     public ServerStatus(JSONObject json) throws Exception {
         name = json.getString("name");

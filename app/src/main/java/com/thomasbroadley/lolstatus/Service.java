@@ -3,12 +3,10 @@ package com.thomasbroadley.lolstatus;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
-* Created by Thomas on 2014-09-13.
-*/
-public class Service {
+public class Service implements Serializable {
     private String name;
     private String status;
     private ArrayList<Incident> incident;
