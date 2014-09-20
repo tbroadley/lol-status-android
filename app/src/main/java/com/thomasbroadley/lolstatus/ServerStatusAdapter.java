@@ -198,7 +198,7 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
         int topPaddingInPX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, topPaddingInDP, res.getDisplayMetrics());
 
         TextView message = new TextView(context);
-        message.setText(thisUpdate.getMessage());
+        message.setText(thisUpdate.getMessage().trim());
         if (current) {
             message.setTextSize(17);
             message.setPadding(sidePaddingInPX, topPaddingInPX, sidePaddingInPX, 0);
