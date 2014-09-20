@@ -19,8 +19,6 @@ public class DisclaimerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         setHasOptionsMenu(true);
     }
 
@@ -28,6 +26,13 @@ public class DisclaimerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_disclaimer, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        super.onStart();
     }
 
     @Override

@@ -36,7 +36,6 @@ public class SettingsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         serverAbbrev = getActivity().getResources().getStringArray(R.array.server_abbrev);
         serverName = getActivity().getResources().getStringArray(R.array.server_full);
 
@@ -89,6 +88,8 @@ public class SettingsFragment extends Fragment {
 
     @Override
     public void onStart() {
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         try {
             ObjectInputStream ois = new ObjectInputStream(getActivity().openFileInput(filename));
             useServer = (ArrayList<Boolean>) ois.readObject();
