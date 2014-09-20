@@ -21,8 +21,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class SettingsFragment extends Fragment {
-    final String[] SERVER = new String[] {"br", "eune", "euw", "lan", "las", "na", "oce", "ru", "tr"};
-    final String[] serverName = new String[] {"Brazil", "EU Nordic and East", "EU West", "Latin America North", "Latin America South", "North America", "Oceania", "Russia", "Turkey"};
+    String[] serverAbbrev;
+    String[] serverName;
 
     ArrayList<CheckBox> box;
 
@@ -37,6 +37,8 @@ public class SettingsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         ((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        serverAbbrev = getActivity().getResources().getStringArray(R.array.server_abbrev);
+        serverName = getActivity().getResources().getStringArray(R.array.server_full);
 
         setHasOptionsMenu(true);
     }
@@ -99,7 +101,7 @@ public class SettingsFragment extends Fragment {
 
         LinearLayout ll = (LinearLayout)getView().findViewById(R.id.settings_layout);
 
-        for (int i = 0; i < SERVER.length; i++) {
+        for (int i = 0; i < serverAbbrev.length; i++) {
             CheckBox cb = new CheckBox(getActivity());
             cb.setChecked(useServer.get(i));
             cb.setTag(i);

@@ -16,4 +16,30 @@
     <string name="created_by">LOL Status was created by Thomas Broadley.</string>
     <string name="connected_query">Could not update server status. Are you connected to the Internet?</string>
 
+    <string-array
+        name="server_abbrev">
+        <item>br</item>
+        <item>eune</item>
+        <item>euw</item>
+        <item>lan</item>
+        <item>las</item>
+        <item>na</item>
+        <item>oce</item>
+        <item>ru</item>
+        <item>tr</item>
+    </string-array>
+
+    <string-array
+        name="server_full">
+        <item>Brazil</item>
+        <item>EU Nordic and East</item>
+        <item>EU West</item>
+        <item>Latin America North</item>
+        <item>Latin America South</item>
+        <item>North America</item>
+        <item>Oceania</item>
+        <item>Russia</item>
+        <item>Turkey</item>
+    </string-array>
+
 </resources>

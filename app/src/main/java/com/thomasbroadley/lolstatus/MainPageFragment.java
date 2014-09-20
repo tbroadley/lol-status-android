@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,10 +29,10 @@ public class MainPageFragment extends Fragment {
     final String APIKEY = "?api_key=" + new APIKey().getKey();
     final String URL = "http://status.leagueoflegends.com/shards/";
 
-    final String[] SERVER = new String[] {"br", "eune", "euw", "lan", "las", "na", "oce", "ru", "tr"};
+    String[] serverAbbrev;
     final int[] PREFERRED_SERVER = new int[] {2, 5};
 
-    ArrayList<ServerStatus> server;
+    ArrayList<ServerStatus> serverStatuses;
     ArrayList<Boolean> useServer;
     ArrayList<String> displayedServer;
 
@@ -42,6 +43,8 @@ public class MainPageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        serverAbbrev = getActivity().getResources().getStringArray(R.array.server_abbrev);
 
         setHasOptionsMenu(true);
     }
@@ -65,7 +68,7 @@ public class MainPageFragment extends Fragment {
     }
 
     public void readStatus() throws Exception {
-        server = new ArrayList<ServerStatus>();
+        serverStatuses = new ArrayList<ServerStatus>();
 
         String filename = "servers_to_display";
 
@@ -77,7 +80,7 @@ public class MainPageFragment extends Fragment {
         } else {
             useServer = new ArrayList<Boolean>();
 
-            for (int i = 0; i < SERVER.length; i++) {
+            for (int i = 0; i < serverAbbrev.length; i++) {
                 useServer.add(false);
             }
 
@@ -94,7 +97,7 @@ public class MainPageFragment extends Fragment {
         updateServerStatus();
 
         elv = (ExpandableListView)getView().findViewById(R.id.expandableListView);
-        elv.setAdapter(new ServerStatusAdapter(getActivity(), server, elv));
+        elv.setAdapter(new ServerStatusAdapter(getActivity(), serverStatuses, elv));
 
         SharedPreferences prefs = getActivity().getSharedPreferences("LOL_STATUS_PREFS", Context.MODE_PRIVATE);
         String expanded = prefs.getString("expanded", "");
@@ -123,15 +126,15 @@ public class MainPageFragment extends Fragment {
     public void updateDisplayedServers() {
         displayedServer = new ArrayList<String>();
 
-        for (int i = 0; i < SERVER.length; i++) {
+        for (int i = 0; i < serverAbbrev.length; i++) {
             if (useServer.get(i)) {
-                displayedServer.add(SERVER[i]);
+                displayedServer.add(serverAbbrev[i]);
             }
         }
     }
 
     public void updateServerStatus() throws Exception {
-        server = new ArrayList<ServerStatus>();
+        serverStatuses = new ArrayList<ServerStatus>();
 
         String filename = "status_file";
 
@@ -144,12 +147,12 @@ public class MainPageFragment extends Fragment {
 
                 JSONReader json = new JSONReader();
                 JSONObject jsonobj = json.read(url);
-                server.add(new ServerStatus(jsonobj));
+                serverStatuses.add(new ServerStatus(jsonobj));
 
             }
 
             TextView empty = (TextView) getView().findViewById(R.id.empty);
-            if (server.isEmpty()) {
+            if (serverStatuses.isEmpty()) {
                 empty.setVisibility(View.VISIBLE);
                 empty.setText(R.string.no_servers_selected);
             } else {
