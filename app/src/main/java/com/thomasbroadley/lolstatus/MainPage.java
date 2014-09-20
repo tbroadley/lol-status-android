@@ -23,7 +23,9 @@ public class MainPage extends ActionBarActivity {
 
     @Override
     public void onPause() {
-        ((MainPageFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_container)).updateExpanded();
+        if (getSupportFragmentManager().findFragmentById(R.id.fragment_container) instanceof MainPageFragment) {
+            ((MainPageFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container)).updateExpanded();
+        }
         super.onPause();
     }
 }
