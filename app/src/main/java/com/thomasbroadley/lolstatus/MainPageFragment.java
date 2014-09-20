@@ -58,6 +58,8 @@ public class MainPageFragment extends Fragment {
 
     @Override
     public void onStart() {
+        ((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         try {
             readStatus();
         } catch (Exception e) {
