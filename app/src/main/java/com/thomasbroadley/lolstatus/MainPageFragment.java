@@ -26,7 +26,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 public class MainPageFragment extends Fragment {
-    final String APIKEY = "?api_key=" + new APIKey().getKey();
     final String URL = "http://status.leagueoflegends.com/shards/";
 
     String[] serverAbbrev;
@@ -145,7 +144,7 @@ public class MainPageFragment extends Fragment {
 
         if (info != null && info.isConnected()) {
             for (int i = 0; i < displayedServer.size(); i++) {
-                String url = URL + displayedServer.get(i) + APIKEY;
+                String url = URL + displayedServer.get(i);
 
                 JSONReader json = new JSONReader();
                 JSONObject jsonobj = json.read(url);
