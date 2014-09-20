@@ -2,6 +2,7 @@ package com.thomasbroadley.lolstatus;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
@@ -87,7 +88,7 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         ((ActionBarActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         try {
@@ -126,7 +127,7 @@ public class SettingsFragment extends Fragment {
             ll.addView(cb);
         }
 
-        super.onStart();
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
