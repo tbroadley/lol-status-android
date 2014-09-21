@@ -13,7 +13,6 @@
     <string name="disclaimer_title">About</string>
     <string name="created_by">LOL Status was created by Thomas Broadley.</string>
     <string name="connected_query">Could not update server status. Are you connected to the Internet?</string>
-    <string name="posted">Posted\u0020</string>
     <string name="server_status_updated">Server status updated</string>
     <string name="could_not_update">Could not update server status</string>
 

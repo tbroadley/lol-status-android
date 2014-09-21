@@ -222,7 +222,7 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
             updateTime = now;
         }
 
-        time.setText(context.getString(R.string.posted) + DateUtils.getRelativeDateTimeString(context, updateTime, 0, DateUtils.WEEK_IN_MILLIS, 0));
+        time.setText(DateUtils.getRelativeDateTimeString(context, updateTime, 0, DateUtils.WEEK_IN_MILLIS, 0));
         if (current) {
             time.setTextSize(14);
             time.setPadding(sidePaddingInPX, 0, sidePaddingInPX, 0);
