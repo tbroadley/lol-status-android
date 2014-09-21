@@ -163,7 +163,7 @@ public class MainPageFragment extends Fragment {
             ObjectOutputStream oos = new ObjectOutputStream(getActivity().openFileOutput(filename, Context.MODE_PRIVATE));
             oos.writeObject(serverStatuses);
 
-            Toast t = Toast.makeText(getActivity(), "Server status updated", Toast.LENGTH_SHORT);
+            Toast t = Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.server_status_updated), Toast.LENGTH_SHORT);
             t.show();
         } else {
             if (getActivity().getFileStreamPath(filename).exists() && getActivity().getFileStreamPath(filename).length() > 0) {
@@ -175,7 +175,7 @@ public class MainPageFragment extends Fragment {
                 empty.setText(R.string.connected_query);
             }
 
-            Toast t = Toast.makeText(getActivity(), "Could not update server status", Toast.LENGTH_SHORT);
+            Toast t = Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.could_not_update), Toast.LENGTH_SHORT);
             t.show();
         }
     }

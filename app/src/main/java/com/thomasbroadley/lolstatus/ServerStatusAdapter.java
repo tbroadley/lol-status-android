@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class ServerStatusAdapter extends BaseExpandableListAdapter {
     private Context context;
@@ -198,7 +199,13 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
         int topPaddingInPX = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, topPaddingInDP, res.getDisplayMetrics());
 
         TextView message = new TextView(context);
-        message.setText(thisUpdate.getMessage().trim());
+        String thisMessage;
+        if (thisUpdate.getMessages().containsKey(Locale.getDefault().getLanguage())) {
+            thisMessage = thisUpdate.getMessages().get(Locale.getDefault().getLanguage());
+        } else {
+            thisMessage = thisUpdate.getMessages().get("default");
+        }
+        message.setText(thisMessage.trim());
         if (current) {
             message.setTextSize(17);
             message.setPadding(sidePaddingInPX, topPaddingInPX, sidePaddingInPX, 0);
@@ -215,7 +222,7 @@ public class ServerStatusAdapter extends BaseExpandableListAdapter {
             updateTime = now;
         }
 
-        time.setText("Posted " + DateUtils.getRelativeDateTimeString(context, updateTime, 0, DateUtils.WEEK_IN_MILLIS, 0));
+        time.setText(context.getString(R.string.posted) + DateUtils.getRelativeDateTimeString(context, updateTime, 0, DateUtils.WEEK_IN_MILLIS, 0));
         if (current) {
             time.setTextSize(14);
             time.setPadding(sidePaddingInPX, 0, sidePaddingInPX, 0);

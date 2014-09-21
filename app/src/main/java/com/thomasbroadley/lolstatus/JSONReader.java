@@ -29,7 +29,7 @@ public class JSONReader {
 
             try {
                 is = new URL(url[0]).openStream();
-                BufferedReader rd = new BufferedReader(new InputStreamReader(is));
+                BufferedReader rd = new BufferedReader(new InputStreamReader(is, "UTF-8"));
                 String line;
                 json = new StringBuilder();
 

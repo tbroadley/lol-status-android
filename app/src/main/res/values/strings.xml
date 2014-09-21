@@ -5,16 +5,17 @@
     <string name="action_settings">Settings</string>
     <string name="action_refresh">Refresh</string>
     <string name="title_activity_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="settings_header">Displayed servers:</string>
     <string name="no_servers_selected">No servers selected.</string>
     <string name="select_all">Select all</string>
     <string name="clear_all">Clear all</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="disclaimer">LOL Status isn\'t endorsed by Riot Games and doesn\'t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</string>
     <string name="disclaimer_title">About</string>
     <string name="created_by">LOL Status was created by Thomas Broadley.</string>
     <string name="connected_query">Could not update server status. Are you connected to the Internet?</string>
+    <string name="posted">Posted\u0020</string>
+    <string name="server_status_updated">Server status updated</string>
+    <string name="could_not_update">Could not update server status</string>
 
     <string-array
         name="server_abbrev">
