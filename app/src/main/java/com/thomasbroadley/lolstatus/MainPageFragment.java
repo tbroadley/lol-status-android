@@ -142,6 +142,9 @@ public class MainPageFragment extends Fragment {
         ConnectivityManager manager = (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = manager.getActiveNetworkInfo();
 
+        TextView statusTextView = (TextView) getView().findViewById(R.id.empty);
+        statusTextView.setVisibility(View.INVISIBLE);
+
         if (info != null && info.isConnected()) {
             for (int i = 0; i < displayedServer.size(); i++) {
                 String url = URL + displayedServer.get(i);
@@ -152,12 +155,11 @@ public class MainPageFragment extends Fragment {
 
             }
 
-            TextView empty = (TextView) getView().findViewById(R.id.empty);
             if (serverStatuses.isEmpty()) {
-                empty.setVisibility(View.VISIBLE);
-                empty.setText(R.string.no_servers_selected);
+                statusTextView.setVisibility(View.VISIBLE);
+                statusTextView.setText(R.string.no_servers_selected);
             } else {
-                empty.setVisibility(View.INVISIBLE);
+                statusTextView.setVisibility(View.INVISIBLE);
             }
 
             ObjectOutputStream oos = new ObjectOutputStream(getActivity().openFileOutput(filename, Context.MODE_PRIVATE));
@@ -170,9 +172,8 @@ public class MainPageFragment extends Fragment {
                 ObjectInputStream ois = new ObjectInputStream(getActivity().openFileInput(filename));
                 serverStatuses = (ArrayList<ServerStatus>)ois.readObject();
             } else {
-                TextView empty = (TextView) getView().findViewById(R.id.empty);
-                empty.setVisibility(View.VISIBLE);
-                empty.setText(R.string.connected_query);
+                statusTextView.setVisibility(View.VISIBLE);
+                statusTextView.setText(R.string.connected_query);
             }
 
             Toast t = Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.could_not_update), Toast.LENGTH_SHORT);

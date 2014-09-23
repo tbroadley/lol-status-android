@@ -13,7 +13,7 @@ public class MainPage extends ActionBarActivity {
 
         MainPageFragment mainPage = new MainPageFragment();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainPage).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mainPage).commit();
     }
 
     @Override
